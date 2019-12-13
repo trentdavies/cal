@@ -148,6 +148,21 @@ func (c *Calendar) IsHoliday(date time.Time) bool {
 	return false
 }
 
+func (c *Calendar) GetHoliday(date time.Time) (Holiday, bool) {
+	idx := date.Month()
+	for i := range c.holidays[idx] {
+		if c.holidays[idx][i].matches(date) {
+			return c.holidays[idx][i], true
+		}
+	}
+	for i := range c.holidays[0] {
+		if c.holidays[0][i].matches(date) {
+			return c.holidays[0][i], true
+		}
+	}
+	return Holiday{}, false
+}
+
 // IsWorkday reports whether a given date is a work day (business day).
 func (c *Calendar) IsWorkday(date time.Time) bool {
 	day := date.Weekday()

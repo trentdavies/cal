@@ -40,6 +40,8 @@ type Holiday struct {
 	// last values used to calculate month and day with Func
 	lastYear int
 	lastLoc  *time.Location
+	// label of the Holiday
+	Label string
 }
 
 // NewHoliday creates a new Holiday instance for an exact day of a month.
@@ -91,4 +93,9 @@ func (h *Holiday) matches(date time.Time) bool {
 		return date.YearDay() == h.Offset
 	}
 	return false
+}
+
+func HolidayWithLabel(h Holiday, label string) Holiday {
+	h.Label = label
+	return h
 }
