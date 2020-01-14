@@ -1,1 +1,1 @@
-module github.com/rickar/cal
+module github.com/trentdavies/cal
